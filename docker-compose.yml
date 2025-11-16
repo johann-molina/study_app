@@ -8,13 +8,12 @@ services:
     ports: ["8000:8000"]
     environment:
       # API reads .env via python-dotenv if present, but we set runtime envs here:
-      DB_PATH: /data/exams.db
+      DB_PATH: /data/temporal/exams.db
       OLLAMA_URL: http://host.docker.internal:11434
       OLLAMA_MODEL: llama3.2:3b
     volumes:
-      # persist/load your SQLite outside the image
-      - D:/ESS/ocr_math_q/data/temporal/exams.db:/data/exams.db
-      #- ./data/temporal:/data/temporal
+      # Mount the entire directory to ensure proper permissions and directory structure
+      - ./data/temporal:/data/temporal
     extra_hosts:
       # helps Linux users resolve host.docker.internal
       - "host.docker.internal:host-gateway"

@@ -21,7 +21,8 @@ def env_json(name: str, default: Optional[Dict[str, Any]] = None) -> Dict[str, A
     
 # ------------- core knobs -------------
 # SQLite database with your questions/attempts
-DB_PATH: str = os.getenv("DB_PATH", "data\\temporal\\exams.db")
+# Use forward slashes for cross-platform compatibility (works on both Windows and Linux)
+DB_PATH: str = os.getenv("DB_PATH", "data/temporal/exams.db")
 
 # LLM endpoint (Ollama by default).
 # Note: inside Docker, you’ll often set OLLAMA_URL=http://host.docker.internal:11434

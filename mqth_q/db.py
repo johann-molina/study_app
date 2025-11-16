@@ -7,7 +7,7 @@
 #       - save_attempt() - guardar intento de un usuario
 
 from __future__ import annotations
-import sqlite3, json, time
+import sqlite3, json, time, os
 from typing import Any, Dict, List, Optional
 from contextlib import contextmanager
 
@@ -15,6 +15,10 @@ from .config import DB_PATH, SQLITE_JOURNAL_MODE, SQLITE_SYNCHRONOUS
 
 # --------------------------- Connection helpers ---------------------------
 def connect() -> sqlite3.Connection:
+    # Create directory if it doesn't exist
+    db_dir = os.path.dirname(DB_PATH)
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir, exist_ok=True)
     # timeout evita que cuelgue si hay lock (mejor falla rápido)
     con = sqlite3.connect(DB_PATH, check_same_thread=False, timeout=2.0)
     con.row_factory = sqlite3.Row
