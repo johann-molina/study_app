@@ -1,9 +1,5 @@
 # Data
-# Allow data/ directory structure but exclude confidential database files
-data/temporal/exams.db
-# Exclude all .db files except requirements files
-*.db
-!requirements*.db
+/data/
 
 # Mac OS-specific storage files
 .DS_Store
